@@ -4,6 +4,16 @@ var passport = require('passport');
 
 var User = require('../models/user.js');
 
+router.get('/status', function(req, res) {
+  if (!req.isAuthenticated()) {
+    return res.status(200).json({
+      status: false
+    });
+  }
+  res.status(200).json({
+    status: true
+  });
+});
 
 router.post('/register', function(req, res) {
   User.register(new User({ username: req.body.username }),
